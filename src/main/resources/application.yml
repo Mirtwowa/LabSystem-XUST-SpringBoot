@@ -1,0 +1,70 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cppsql?serverTimezone=GMT%2B8&characterEncoding=utf-8&userSSl=false
+    username: root
+    password: 123456
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  mail:
+    host: smtp.163.com
+    username: cjl150531@163.com
+    password: cjl20041115..
+    default-encoding: utf-8
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: com.example.springtest.mapper/*.xml
+io:
+  github:
+    swsk33:
+      code-post:
+        core:
+          # 发件邮箱的SMTP服务器（这里以163邮箱为例）
+          smtp-host: "smtp.163.com"
+          # 用于发件的邮箱
+          email: "cjl150531@163.com"
+          # 发件邮箱密码（或者是授权码）
+          password: "WJOAIWBBVLRICRCG"
+          # 是否启用TLS安全加密
+          enable-tls: true
+          # 用于存放管理验证码过期的方式
+          code-storage: "thread_pool"
+          # 验证码格式
+          code-format: "number"
+          # 验证码长度
+          code-length: 6
+          # 你的网站名（会在验证码邮件标题显示）
+          site-name: "这是您的注册验证码"
+          # 是否使用HTML网页邮件
+          enable-html: false
+          template-path: "classpath:templates"
+            # 用于邮件验证码内容的模板文件名（该项只填写文件名！该配置项会和templatePath配置值拼接得到完整文件路径）
+          # 若不配置template-path和code-template-name或者配置模板路径不存在，则发送验证码邮件时会使用内置默认模板
+          code-template-name: "test-template.ftlh"
