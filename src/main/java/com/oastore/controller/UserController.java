@@ -57,7 +57,7 @@ public class UserController{
         if (!newPwd.equals(rePwd)){
             return Result.error("密码不一致");
         }
-        userService.updatePwd(newPwd);
+//        userService.updatePwd(newPwd);
         ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
         operations.getOperations().delete(token);
         return Result.success();

@@ -49,9 +49,7 @@ public class userServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePwd(String newPwd) {
-        Map<String,Object> objectMap = ThreadLocalUtil.get();
-        Integer id  = (Integer) objectMap.get("id");
-        userMapper.updatePwd(EncryptUtils.getMD5String(newPwd),id);
+    public void updatePwd(String newPwd,String account) {
+        userMapper.updatePwd(EncryptUtils.getMD5String(newPwd),account);
     }
 }

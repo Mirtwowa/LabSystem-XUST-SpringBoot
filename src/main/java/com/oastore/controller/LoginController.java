@@ -12,6 +12,8 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -85,5 +87,27 @@ public class LoginController {
         System.out.println(map);
         User user = userService.findByUserName(username);
         return Result.success(user);
+    }
+    @PostMapping("/resetPwd")
+    public Result ResetPwd(String account,String captcha,String newPassword,String userId){
+        User user = userService.findByUserName(account);
+        String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
+        if (user != null&& Objects.equals(verify, "校验成功！")) {
+            userService.updatePwd(newPassword,account);
+            Map<String,Object> claims =new HashMap<>();
+            claims.put("id",user.getId());
+            claims.put("username",user.getUsername());
+            claims.put("password",user.getPassword());
+            //生成请求头
+            String token = JwtUtil.genToken(claims);
+            ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
+            operations.set(token,token,1, TimeUnit.DAYS);
+            return Result.success(token);
+        } else if(user != null&& Objects.equals(verify, "验证码错误或者不存在！")){
+            //占用
+            return Result.error("验证码错误或者不存在！");
+        }else {
+            return Result.error("用户名不存在");
+        }
     }
 }

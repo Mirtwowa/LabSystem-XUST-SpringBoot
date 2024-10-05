@@ -14,5 +14,5 @@ public interface UserService {
 
     void updateUserIcon(String userIcon);
 
-    void updatePwd(String newPwd);
+    void updatePwd(String newPwd,String account);
 }

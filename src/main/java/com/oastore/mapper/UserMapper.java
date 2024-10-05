@@ -30,6 +30,6 @@ public interface UserMapper extends BaseMapper<User> {
     @Update("update user set user_pic=#{UserIcon},update_time=now() where id =#{id}")
     void updateUserIcon(String UserIcon, Integer id);
 
-    @Update("update user set password=#{md5String},update_time=now() where id =#{id}")
-    void updatePwd(String md5String, Integer id);
+    @Update("update user set password=#{md5String},update_time=now() where username=#{account}")
+    void updatePwd(String md5String, String account);
 }

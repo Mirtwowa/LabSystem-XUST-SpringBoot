@@ -17,7 +17,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).excludePathPatterns("/","/userLogin","/register","/api/code/simple/send");
+        registry.addInterceptor(loginInterceptor).excludePathPatterns("/","/userLogin","/register","/api/code/simple/send","/resetPwd");
     }
 
     @Bean
