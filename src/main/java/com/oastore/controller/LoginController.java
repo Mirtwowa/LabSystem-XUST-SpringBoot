@@ -34,9 +34,9 @@ public class LoginController {
     UserService userService;
     @PostMapping("/register")
     public Result register(String account,String captcha,String password,String checkPassword,String userId){
-        String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
+       //String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
         User user = userService.findByUserName(account);
-        if (user == null&& Objects.equals(verify, "校验成功！")) {
+        if (user == null) {
             //没有占用
             //注册
             userService.insertUser(account, password);
@@ -50,10 +50,7 @@ public class LoginController {
             ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
             operations.set(token,token,1, TimeUnit.DAYS);
             return Result.success(token);
-        } else if(user == null&& Objects.equals(verify, "验证码错误或者不存在！")){
-            //占用
-            return Result.error("验证码错误或者不存在！");
-        }else {
+        } else {
             return Result.error("用户名已被占用");
         }
     }
