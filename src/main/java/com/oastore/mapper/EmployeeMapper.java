@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface EmployeeMapper  extends BaseMapper<Employee> {
-    @Insert("insert into `employee` (username , email, gender, department, birth)"+
+    /*@Insert("insert into `employee` (username , email, gender, department, birth)"+
     "values (#{username},#{email},#{gender},#{department},#{birth})")
     void insertUser(Employee employee);
 
@@ -32,5 +32,5 @@ public interface EmployeeMapper  extends BaseMapper<Employee> {
 //
     List<Employee> findByName(String username);
 
-    List<Employee> search(Integer id);
+    List<Employee> search(Integer id);*/
 }

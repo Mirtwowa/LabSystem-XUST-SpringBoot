@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/java?serverTimezone=GMT%2B8&characterEncoding=utf-8&userSSl=false
     username: root
-    password: 134679
+    password: 123456
   mvc:
     hidden-method:
       filter:

@@ -24,7 +24,7 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user where username=#{account}")
     User findByUserName(String account);
 
-    @Update("update user set name=#{name},update_time=#{updateTime} where username =#{username}")
+    @Update("update user set user.username=#{name},update_time=#{updateTime} where username =#{username}")
     void update(User user);
 
     @Update("update user set user_pic=#{UserIcon},update_time=now() where id =#{id}")
