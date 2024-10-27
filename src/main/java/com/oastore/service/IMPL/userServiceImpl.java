@@ -9,7 +9,6 @@ import com.oastore.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -25,14 +24,16 @@ public class userServiceImpl implements UserService {
     }
 
     /**
+     * @param account
      * @param username
      * @param password
+     * @param stu_id
      */
     @Override
-    public void insertUser(String username, String password) {
+    public void insertUser(String account, String password, String name, String stu_id) {
         //加密
          String md5String = EncryptUtils.getMD5String(password);
-        userMapper.insertUser(username,md5String);
+        userMapper.insertUser(account,md5String,name,stu_id);
     }
 
     @Override

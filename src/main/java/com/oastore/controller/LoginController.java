@@ -33,26 +33,24 @@ public class LoginController {
     @Autowired
     UserService userService;
     @PostMapping("/register")
-    public Result register(String account,String captcha,String password,String checkPassword,String userId){
-       //String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
-        User user = userService.findByUserName(account);
-        if (user == null) {
-            //没有占用
-            //注册
-            userService.insertUser(account, password);
-            User loginuser = userService.findByUserName(account);
-            Map<String,Object> claims =new HashMap<>();
-            claims.put("id",loginuser.getId());
-            claims.put("username",loginuser.getUsername());
-            claims.put("password",loginuser.getPassword());
-            //生成请求头
-            String token = JwtUtil.genToken(claims);
-            ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
-            operations.set(token,token,1, TimeUnit.DAYS);
-            return Result.success(token);
-        } else {
-            return Result.error("用户名已被占用");
-        }
+    public Result register(String account,String captcha,String password,String name,String userId,String stu_id){
+//       String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
+//        User user = userService.findByUserName(account);
+        //没有占用
+        //注册
+        userService.insertUser(account, password,name,stu_id);
+        User loginuser = userService.findByUserName(account);
+        Map<String,Object> claims =new HashMap<>();
+        claims.put("id",loginuser.getId());
+        claims.put("username",loginuser.getUsername());
+        claims.put("password",loginuser.getPassword());
+        claims.put("name",loginuser.getName());
+        claims.put("stu_id",loginuser.getStu_id());
+        //生成请求头
+        String token = JwtUtil.genToken(claims);
+        ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
+        operations.set(token,token,1, TimeUnit.DAYS);
+        return Result.success(token);
     }
 
     @RequestMapping("/userLogin")
