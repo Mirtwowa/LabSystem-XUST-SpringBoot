@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/java?serverTimezone=GMT%2B8&characterEncoding=utf-8&userSSl=false
     username: root
-    password: 134679
+    password: 123456
   mvc:
     hidden-method:
       filter:
@@ -33,6 +33,31 @@ spring:
           starttls:
             enabled: true
             required: true
+  kafka:
+    bootstrap-servers: 192.168.121.12:9091
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # Acknowledgment mode to ensure message reliability
+      acks: all
+      retries: 3
+      # Automatically partition records by key
+      partitioner-class: org.apache.kafka.clients.producer.internals.DefaultPartitioner
+    consumer:
+      group-id: demo
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Auto offset reset if no offset found for the consumer group
+      auto-offset-reset: earliest
+    listener:
+      missing-topics-fatal: false
+    properties:
+      # Additional configurations for Kafka
+      security.protocol: PLAINTEXT
+      session.timeout.ms: 10000
+
 redisson:
   singleServerConfig:
     address: "127.0.0.1:6379"
@@ -70,16 +95,3 @@ io:
             # 用于邮件验证码内容的模板文件名（该项只填写文件名！该配置项会和templatePath配置值拼接得到完整文件路径）
           # 若不配置template-path和code-template-name或者配置模板路径不存在，则发送验证码邮件时会使用内置默认模板
           code-template-name: "test-template.ftlh"
-
-  kafka:
-    bootstrap-servers: 192.168.121.76:9091
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-    consumer:
-      group-id: demo
-      enable-auto-commit: true
-      auto-commit-interval: 1000
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer

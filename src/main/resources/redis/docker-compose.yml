@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  redis1:
+    image: redis:latest
+    container_name: redis1
+    ports:
+      - "6371:6379"
+    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    volumes:
+      - redis-data1:/data
+    networks:
+      redis-cluster:
+        ipv4_address: 172.20.0.2
+
+  redis2:
+    image: redis:latest
+    container_name: redis2
+    ports:
+      - "6372:6379"
+    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    volumes:
+      - redis-data2:/data
+    networks:
+      redis-cluster:
+        ipv4_address: 172.20.0.3
+
+  redis3:
+    image: redis:latest
+    container_name: redis3
+    ports:
+      - "6373:6379"
+    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    volumes:
+      - redis-data3:/data
+    networks:
+      redis-cluster:
+        ipv4_address: 172.20.0.4
+
+  redis4:
+    image: redis:latest
+    container_name: redis4
+    ports:
+      - "6374:6379"
+    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    volumes:
+      - redis-data4:/data
+    networks:
+      redis-cluster:
+        ipv4_address: 172.20.0.5
+
+  redis5:
+    image: redis:latest
+    container_name: redis5
+    ports:
+      - "6375:6379"
+    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    volumes:
+      - redis-data5:/data
+    networks:
+      redis-cluster:
+        ipv4_address: 172.20.0.6
+
+  redis6:
+    image: redis:latest
+    container_name: redis6
+    ports:
+      - "6376:6379"
+    command: ["redis-server", "--cluster-enabled", "yes", "--cluster-config-file", "/data/nodes.conf", "--cluster-node-timeout", "5000", "--appendonly", "yes"]
+    volumes:
+      - redis-data6:/data
+    networks:
+      redis-cluster:
+        ipv4_address: 172.20.0.7
+
+networks:
+  redis-cluster:
+    external: true
+
+volumes:
+  redis-data1:
+  redis-data2:
+  redis-data3:
+  redis-data4:
+  redis-data5:
+  redis-data6:

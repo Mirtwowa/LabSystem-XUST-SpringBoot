@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class ConsumerController {
-
-
     @KafkaListener(groupId = "demo",topics = "myqueue")
     public void listen (ConsumerRecord<?, ?> record) throws Exception {
         System.out.println( "主题名："+record.topic());
