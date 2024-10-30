@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class EmployeeService {
-   @Autowired
+   /*@Autowired
    EmployeeMapper employeeMapper;
    public void insertUser(Employee employee){
       employeeMapper.insertUser(employee);
@@ -46,7 +46,7 @@ public class EmployeeService {
       return employees;
     }
 
-  /*  public PageBean<Employee> search(Integer pageNum, Integer pageSize, Integer id,String username) {
+  *//*  public PageBean<Employee> search(Integer pageNum, Integer pageSize, Integer id,String username) {
        PageBean<Employee> pb = new PageBean<>();
        PageHelper.startPage(pageNum, pageSize);
        Map<String, Object> map = ThreadLocalUtil.get();
@@ -57,7 +57,7 @@ public class EmployeeService {
          pb.setTotal(p.getTotal());
          pb.setItems(p.getResult());
          return pb;
-    }*/
+    }*//*
  public List<Employee> search(Integer pageNum, Integer pageSize, Integer id,String username) {
 //       List<Employee> pb = new PageBean<Employee>();
 //       PageHelper.startPage(pageNum, pageSize);
@@ -65,9 +65,9 @@ public class EmployeeService {
 //        Integer userId = (Integer) map.get("id");
         List<Employee> as = employeeMapper.findByName(username);
 //        Page<Employee> p =(Page<Employee>) as;
-        /* pb.setTotal(p.getTotal());
-         pb.setItems(p.getResult());*/
+        *//* pb.setTotal(p.getTotal());
+         pb.setItems(p.getResult());*//*
        return as;
     }
-
+*/
 }

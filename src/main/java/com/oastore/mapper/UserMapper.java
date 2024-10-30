@@ -17,14 +17,14 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from `user`")
     List<User> selectAll();
 
-    @Insert("insert into user(username , password,create_time,update_time)"+
-            "values (#{username},#{password},now(),now())")
-    void insertUser(String username,String password);
+    @Insert("insert into user(username , password,create_time,update_time,name,stu_id)"+
+            "values (#{username},#{password},now(),now(),#{name},#{stu_id})")
+    void insertUser(String username,String password,String name,String stu_id);
 
     @Select("select * from user where username=#{account}")
     User findByUserName(String account);
 
-    @Update("update user set name=#{name},update_time=#{updateTime} where username =#{username}")
+    @Update("update user set user.username=#{name},update_time=#{updateTime} where username =#{username}")
     void update(User user);
 
     @Update("update user set user_pic=#{UserIcon},update_time=now() where id =#{id}")

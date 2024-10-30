@@ -2,7 +2,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cppsql?serverTimezone=GMT%2B8&characterEncoding=utf-8&userSSl=false
+    url: jdbc:mysql://localhost:3306/java?serverTimezone=GMT%2B8&characterEncoding=utf-8&userSSl=false
     username: root
     password: 123456
   mvc:
@@ -23,7 +23,7 @@ spring:
   mail:
     host: smtp.163.com
     username: cjl150531@163.com
-    password: cjl20041115..
+    password: RThfAZvJvuNpdFkU
     default-encoding: utf-8
     protocol: smtp
     properties:
@@ -33,7 +33,34 @@ spring:
           starttls:
             enabled: true
             required: true
+  kafka:
+    bootstrap-servers: 192.168.121.12:9091
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # Acknowledgment mode to ensure message reliability
+      acks: all
+      retries: 3
+      # Automatically partition records by key
+      partitioner-class: org.apache.kafka.clients.producer.internals.DefaultPartitioner
+    consumer:
+      group-id: demo
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Auto offset reset if no offset found for the consumer group
+      auto-offset-reset: earliest
+    listener:
+      missing-topics-fatal: false
+    properties:
+      # Additional configurations for Kafka
+      security.protocol: PLAINTEXT
+      session.timeout.ms: 10000
 
+redisson:
+  singleServerConfig:
+    address: "127.0.0.1:6379"
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -51,7 +78,7 @@ io:
           # 用于发件的邮箱
           email: "cjl150531@163.com"
           # 发件邮箱密码（或者是授权码）
-          password: "WJOAIWBBVLRICRCG"
+          password: "RThfAZvJvuNpdFkU"
           # 是否启用TLS安全加密
           enable-tls: true
           # 用于存放管理验证码过期的方式

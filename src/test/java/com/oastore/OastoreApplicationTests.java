@@ -16,7 +16,7 @@ class OastoreApplicationTests {
     @Test
     void contextLoads() {
 //        userService.insertUser("123456","123456789");
-        System.out.println(employeeService.getAllEmployee());
+//        System.out.println(employeeService.getAllEmployee());
     }
 
 

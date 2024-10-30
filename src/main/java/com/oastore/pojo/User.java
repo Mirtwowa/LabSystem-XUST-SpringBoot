@@ -21,4 +21,5 @@ public class User {
     private String userPic;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private String stu_id;
 }

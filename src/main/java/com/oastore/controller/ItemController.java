@@ -1,6 +1,5 @@
 package com.oastore.controller;
 
-import com.oastore.mapper.BookStorageMapper;
 import com.oastore.pojo.Bookstorage;
 import com.oastore.service.BookStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class ItemController {
-    @Autowired
+    /*@Autowired
     BookStorageService bookStorageService;
     @Autowired
     BookStorageMapper bookStorageMapper;
@@ -34,5 +33,5 @@ public class ItemController {
         List<Bookstorage> bookstorages =bookStorageMapper.selectAll();
         model.addAttribute("items",bookstorages);
         return "redirect:/bookstorage";
-    }
+    }*/
 }

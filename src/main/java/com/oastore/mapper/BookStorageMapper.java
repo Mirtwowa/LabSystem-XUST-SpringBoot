@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+/*@Repository
 public interface BookStorageMapper extends BaseMapper<Bookstorage> {
     @Select("select * from `bookstorage`")
     List<Bookstorage> selectAll();
@@ -20,4 +20,4 @@ public interface BookStorageMapper extends BaseMapper<Bookstorage> {
      void insertItem(Bookstorage bookstorage);
     @Delete("delete from `bookstorage` where itemname=#{itemname}")
     void delete(String employee);
-}
+}*/

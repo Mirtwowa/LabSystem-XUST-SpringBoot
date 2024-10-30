@@ -1,14 +1,13 @@
 package com.oastore.service;
 
 
-import com.oastore.mapper.BookStorageMapper;
 import com.oastore.pojo.Bookstorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookStorageService {
-    @Autowired
+    /*@Autowired
     BookStorageMapper bookStorageMapper;
     public Bookstorage selectAll(){
         bookStorageMapper.selectAll();
@@ -16,5 +15,5 @@ public class BookStorageService {
     }
     public void insertItem(Bookstorage bookstorage){
         bookStorageMapper.insertItem(bookstorage);
-    }
+    }*/
 }

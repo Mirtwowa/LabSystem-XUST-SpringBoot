@@ -26,7 +26,7 @@ public class EmployeeController {
         employee.setGender(gender);
         employee.setDepartment(department);
         employee.setBirth(birth);
-        employeeService.insertUser(employee);
+//        employeeService.insertUser(employee);
         return Result.success();
     }
     @PutMapping ("/UpdateEmployee")
@@ -42,18 +42,18 @@ public class EmployeeController {
         employee.setGender(gender);
         employee.setDepartment(department);
         employee.setBirth(birth);
-        employeeService.change(employee);
+//        employeeService.change(employee);
         return Result.success();
     }
     @DeleteMapping("/deleteEmployee")
     public Result deleteEmployee(Integer id) {
-        employeeService.delete(id);
+//        employeeService.delete(id);
         return Result.success();
     }
     @RequestMapping("/getAllEmployee")
     public Result  getAllEmployee() {
-        List<Employee> employees = employeeService.getAllEmployee();
-        return Result.success(employees);
+//        List<Employee> employees = employeeService.getAllEmployee();
+        return Result.success();
     }
     @GetMapping("/searchEmployee")
     public  Result<List<Employee>> searchEmployee(
@@ -62,7 +62,7 @@ public class EmployeeController {
             @RequestParam(required = false) Integer id,
             @RequestParam(required = false) String username) {
 //            PageBean<Employee> pb =  employeeService.search(pageNum,pageSize, id,username);
-        List<Employee> pb =  employeeService.search(pageNum,pageSize, id,username);
-            return Result.success(pb);
+//        List<Employee> pb =  employeeService.search(pageNum,pageSize, id,username);
+            return Result.success();
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     User findByUserName(String account);
 
-    void insertUser(String username, String password);
+    void insertUser(String account, String password, String name, String stu_id);
 
     void update(User user);
 
