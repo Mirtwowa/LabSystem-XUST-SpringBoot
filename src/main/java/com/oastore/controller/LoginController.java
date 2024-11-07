@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import static jodd.util.ThreadUtil.sleep;
+
 @RestController
 public class LoginController {
     @Autowired
@@ -34,23 +36,21 @@ public class LoginController {
     UserService userService;
     @PostMapping("/register")
     public Result register(String account,String captcha,String password,String name,String userId,String stu_id){
-//       String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
-//        User user = userService.findByUserName(account);
-        //没有占用
-        //注册
-        userService.insertUser(account, password,name,stu_id);
-        User loginuser = userService.findByUserName(account);
-        Map<String,Object> claims =new HashMap<>();
-        claims.put("id",loginuser.getId());
-        claims.put("username",loginuser.getUsername());
-        claims.put("password",loginuser.getPassword());
-        claims.put("name",loginuser.getName());
-        claims.put("stu_id",loginuser.getStu_id());
-        //生成请求头
-        String token = JwtUtil.genToken(claims);
-        ValueOperations<String,String> operations = stringRedisTemplate.opsForValue();
-        operations.set(token,token,1, TimeUnit.DAYS);
-        return Result.success(token);
+        String verify = simpleEmailCodeAPI.verifyCode(userId,captcha);
+        User user = userService.findByUserName(account);
+        if (user == null) {
+            //没有占用
+            //注册
+            userService.insertUser(account, password,name,stu_id);
+            User loginuser = userService.findByUserName(account);
+            String token = String.valueOf(userService.insertRedis(loginuser));
+            return Result.success(token);
+        } else if(user == null&& Objects.equals(verify, "验证码错误或者不存在！")){
+            //占用
+            return Result.error("验证码错误或者不存在！");
+        }else {
+            return Result.error("用户名已被占用");
+        }
     }
 
     @RequestMapping("/userLogin")
